@@ -17,6 +17,7 @@ async function main(args) {
     }
   }
   if (userId !== TOKEN) {
+    return {
       error: {
         statusCode: StatusCodes.UNAUTHORIZED,
         body: {message: 'invalid user id'}

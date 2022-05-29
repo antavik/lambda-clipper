@@ -1,10 +1,29 @@
 const { StatusCodes, getReasonPhrase } = require("http-status-codes")
 const axios = require("axios")
-const { Readability } = require('@mozilla/readability')
-const { JSDOM } = require('jsdom')
+const Readability = require("@mozilla/readability")
+const JSDOM = require("jsdom")
+
+const TOKEN = process.env["TOKEN"]
 
 
 async function main(args) {
+  const userId = args.__ow_headers["x-user-id"]
+  if (!userId) {
+    return {
+      error: {
+        statusCode: StatusCodes.UNAUTHORIZED,
+        body: {message: 'user id header required'}
+      }
+    }
+  }
+  if (userId !== TOKEN) {
+      error: {
+        statusCode: StatusCodes.UNAUTHORIZED,
+        body: {message: 'invalid user id'}
+      }
+    }
+  }
+
   const url = args["url"]
 
   const response = await axios.get(
@@ -14,14 +33,14 @@ async function main(args) {
     }
   );
 
-  // if (response.code != 200) {
-  //   return {
-  //     error: {
-  //       statusCode: StatusCodes.INTERNAL_SERVER_ERROR,
-  //       body: {message: "could not get url content"}
-  //     }
-  //   }
-  // }
+  if (response.code !== 200) {
+    return {
+      error: {
+        statusCode: StatusCodes.INTERNAL_SERVER_ERROR,
+        body: {message: "could not get url content"}
+      }
+    }
+  }
 
   var doc = new JSDOM(response.data)
   var reader = new Readability(doc.window.document)

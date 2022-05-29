@@ -43,11 +43,9 @@ async function main(args) {
     }
   }
 
-  console.log(response.data)
-
-  let doc = new JSDOM(response.data)
-  let reader = new Readability(doc.window.document)
-  let article = reader.parse()
+  var doc = new JSDOM(response.data)
+  var reader = new Readability(doc.window.document)
+  var article = reader.parse()
 
   console.log(article)
 

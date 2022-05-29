@@ -12,7 +12,7 @@ async function main(args) {
     return {
       error: {
         statusCode: StatusCodes.UNAUTHORIZED,
-        body: {message: 'user id header required'}
+        body: {message: "user id header required"}
       }
     }
   }
@@ -20,7 +20,7 @@ async function main(args) {
     return {
       error: {
         statusCode: StatusCodes.UNAUTHORIZED,
-        body: {message: 'invalid user id'}
+        body: {message: "invalid user id"}
       }
     }
   }
@@ -43,9 +43,13 @@ async function main(args) {
     }
   }
 
+  console.log(response.data)
+
   let doc = new JSDOM(response.data)
   let reader = new Readability(doc.window.document)
   let article = reader.parse()
+
+  console.log(article)
 
   return {"body": article}
 }

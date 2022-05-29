@@ -43,10 +43,11 @@ async function main(args) {
     }
   }
 
-  var doc = new JSDOM(response.data)
-  var reader = new Readability(doc.window.document)
+  let doc = new JSDOM(response.data)
+  let reader = new Readability(doc.window.document)
+  let article = reader.parse()
 
-  return {"body": reader.parse()}
+  return {"body": article}
 }
 
 exports.main = main

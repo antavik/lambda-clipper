@@ -2,3 +2,5 @@ packages:
   - name: clipper
     actions:
       - name: clip
+environment:
+  TOKEN: $(TOKEN)

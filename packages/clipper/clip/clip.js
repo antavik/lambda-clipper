@@ -34,7 +34,7 @@ async function main(args) {
     }
   );
 
-  if (response.code !== 200) {
+  if (response.status !== 200) {
     return {
       error: {
         statusCode: StatusCodes.INTERNAL_SERVER_ERROR,

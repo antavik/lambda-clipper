@@ -1,13 +1,13 @@
-const { StatusCodes, getReasonPhrase } = require("http-status-codes")
-const axios = require("axios")
-const Readability = require("@mozilla/readability")
-const JSDOM = require("jsdom")
+const { StatusCodes, getReasonPhrase } = require("http-status-codes");
+const axios = require("axios");
+const Readability = require("@mozilla/readability");
+const JSDOM = require("jsdom");
 
-const TOKEN = process.env["TOKEN"]
+const TOKEN = process.env["TOKEN"];
 
 
 async function main(args) {
-  const userId = args.__ow_headers["x-user-id"]
+  const userId = args.__ow_headers["x-user-id"];
   if (!userId) {
     return {
       error: {
@@ -25,7 +25,7 @@ async function main(args) {
     }
   }
 
-  const url = args["url"]
+  const url = args["url"];
 
   const response = await axios.get(
     url,
@@ -43,13 +43,14 @@ async function main(args) {
     }
   }
 
-  var doc = new JSDOM(response.data)
-  var reader = new Readability(doc.window.document)
-  var article = reader.parse()
+  var doc = new JSDOM(response.data);
+  var reader = new Readability(doc.window.document);
+  var article = reader.parse();
 
-  console.log(article)
+  console.log('article');
+  console.log(article);
 
   return {"body": article}
 }
 
-exports.main = main
+exports.main = main;

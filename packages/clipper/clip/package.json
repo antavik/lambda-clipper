@@ -5,7 +5,8 @@
   "main": "clip.js",
   "dependencies": {
     "http-status-codes": "^2.2.0",
-    "@mozilla/readability": "^0.4.2"
+    "@mozilla/readability": "^0.4.2",
+    "jsdom": "^19.0.0"
   },
   "devDependencies": {}
 }

@@ -1,5 +1,7 @@
 const { StatusCodes, getReasonPhrase } = require("http-status-codes")
 const axios = require("axios")
+const { Readability } = require('@mozilla/readability')
+const { JSDOM } = require('jsdom')
 
 
 async function main(args) {
@@ -21,9 +23,10 @@ async function main(args) {
     }
   }
 
-  var article = new Readability(response.data).parse()
+  var doc = new JSDOM(response.data)
+  var reader = new Readability(doc.window.document)
 
-  return {"body": article}
+  return {"body": reader.parse()}
 }
 
 exports.main = main

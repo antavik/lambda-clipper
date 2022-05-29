@@ -5,6 +5,8 @@ const { JSDOM } = require("jsdom");
 
 const TOKEN = process.env["TOKEN"];
 
+const USER_AGENT = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:100.0) Gecko/20100101 Firefox/100.0"
+
 
 async function main(args) {
   const userId = args.__ow_headers["x-user-id"];
@@ -12,7 +14,7 @@ async function main(args) {
     return {
       error: {
         statusCode: StatusCodes.UNAUTHORIZED,
-        body: {message: "user id header required"}
+        body: { message: "user id header required" }
       }
     }
   }
@@ -20,7 +22,7 @@ async function main(args) {
     return {
       error: {
         statusCode: StatusCodes.UNAUTHORIZED,
-        body: {message: "invalid user id"}
+        body: { message: "invalid user id" }
       }
     }
   }
@@ -29,16 +31,14 @@ async function main(args) {
 
   const response = await axios.get(
     url,
-    headers={
-      "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:100.0) Gecko/20100101 Firefox/100.0"
-    }
+    headers={ "User-Agent": USER_AGENT }
   );
 
   if (response.status !== 200) {
     return {
       error: {
         statusCode: StatusCodes.INTERNAL_SERVER_ERROR,
-        body: {message: "could not get url content"}
+        body: { message: "could not get url content" }
       }
     }
   }
@@ -52,12 +52,12 @@ async function main(args) {
     return {
       error: {
         statusCode: StatusCodes.INTERNAL_SERVER_ERROR,
-        body: {message: getReasonPhrase(StatusCodes.INTERNAL_SERVER_ERROR)}
+        body: { message: getReasonPhrase(StatusCodes.INTERNAL_SERVER_ERROR) }
       }
     }
   }
 
-  return {body: article}
+  return { body: article }
 }
 
 exports.main = main;

@@ -25,3 +25,5 @@ async function main(args) {
 
   return {"body": article}
 }
+
+exports.main = main

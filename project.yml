@@ -3,4 +3,4 @@ packages:
     actions:
       - name: clip
         environment:
-          TOKEN: $(TOKEN)
+          TOKEN: ${TOKEN}

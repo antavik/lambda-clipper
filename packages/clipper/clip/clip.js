@@ -14,14 +14,14 @@ async function main(args) {
     }
   );
 
-  if (response.code != 200) {
-    return {
-      error: {
-        statusCode: StatusCodes.INTERNAL_SERVER_ERROR,
-        body: {message: "could not get url content"}
-      }
-    }
-  }
+  // if (response.code != 200) {
+  //   return {
+  //     error: {
+  //       statusCode: StatusCodes.INTERNAL_SERVER_ERROR,
+  //       body: {message: "could not get url content"}
+  //     }
+  //   }
+  // }
 
   var doc = new JSDOM(response.data)
   var reader = new Readability(doc.window.document)

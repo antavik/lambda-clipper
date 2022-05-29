@@ -1,0 +1,11 @@
+{
+  "name": "clipper",
+  "version": "1.0.0",
+  "description": "Serverless web article clipper",
+  "main": "index.js",
+  "dependencies": {
+    "http-status-codes": "^2.2.0",
+    "@mozilla/readability": "^0.4.2",
+  },
+  "devDependencies": {}
+}

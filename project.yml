@@ -1,0 +1,5 @@
+packages:
+  - name: clipper
+    actions:
+      - name: index.js
+        runtime: nodejs:default

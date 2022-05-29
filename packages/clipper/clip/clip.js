@@ -1,7 +1,7 @@
 const { StatusCodes, getReasonPhrase } = require("http-status-codes");
 const axios = require("axios");
 const Readability = require("@mozilla/readability");
-const JSDOM = require("jsdom");
+const jsdom = require("jsdom");
 
 const TOKEN = process.env["TOKEN"];
 
@@ -44,7 +44,7 @@ async function main(args) {
   }
 
   try {
-    var doc = new JSDOM(response.data);
+    var doc = new jsdom.JSDOM(response.data);
     var reader = new Readability(doc.window.document);
     var article = reader.parse();
   } catch (error) {
@@ -57,7 +57,7 @@ async function main(args) {
     }
   }
 
-  return {"body": article}
+  return {body: article}
 }
 
 exports.main = main;

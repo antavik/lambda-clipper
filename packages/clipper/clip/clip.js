@@ -43,12 +43,19 @@ async function main(args) {
     }
   }
 
-  var doc = new JSDOM(response.data);
-  var reader = new Readability(doc.window.document);
-  var article = reader.parse();
-
-  console.log('article');
-  console.log(article);
+  try {
+    var doc = new JSDOM(response.data);
+    var reader = new Readability(doc.window.document);
+    var article = reader.parse();
+  } catch (error) {
+    console.error(error);
+    return {
+      error: {
+        statusCode: StatusCodes.INTERNAL_SERVER_ERROR,
+        body: {message: getReasonPhrase(StatusCodes.INTERNAL_SERVER_ERROR)}
+      }
+    }
+  }
 
   return {"body": article}
 }

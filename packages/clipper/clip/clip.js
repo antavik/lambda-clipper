@@ -3,7 +3,7 @@ const { Readability } = require("@mozilla/readability");
 const { JSDOM } = require("jsdom");
 const axios = require("axios");
 
-const TOKEN = process.env["TOKEN"];
+const USER_TOKEN = process.env["USER_TOKEN"];
 const USER_AGENT = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:100.0) Gecko/20100101 Firefox/100.0";
 
 
@@ -17,7 +17,7 @@ async function main(args) {
       }
     }
   }
-  if (userId !== TOKEN) {
+  if (userId !== USER_TOKEN) {
     return {
       error: {
         statusCode: StatusCodes.UNAUTHORIZED,

@@ -4,4 +4,4 @@ packages:
       - name: clip
         runtime: nodejs:14
         environment:
-          TOKEN: ${TOKEN}
+          USER_TOKEN: ${USER_TOKEN}

@@ -3,11 +3,11 @@ alerts:
 - rule: DOMAIN_FAILED
 name: clipper
 functions:
-- github:
+- lambda-clipper
+  github:
     branch: main
-    deploy_on_push: true
     repo: antibantique/lambda-clipper
-  name: lambda-clipper
+    deploy_on_push: true
   routes:
   - path: /
   source_dir: /

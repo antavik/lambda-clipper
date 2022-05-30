@@ -1,11 +1,10 @@
 const { StatusCodes, getReasonPhrase } = require("http-status-codes");
-const axios = require("axios");
 const { Readability } = require("@mozilla/readability");
 const { JSDOM } = require("jsdom");
+const axios = require("axios");
 
 const TOKEN = process.env["TOKEN"];
-
-const USER_AGENT = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:100.0) Gecko/20100101 Firefox/100.0"
+const USER_AGENT = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:100.0) Gecko/20100101 Firefox/100.0";
 
 
 async function main(args) {

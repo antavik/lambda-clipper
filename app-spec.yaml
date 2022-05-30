@@ -1,6 +1,7 @@
 alerts:
 - rule: DEPLOYMENT_FAILED
 - rule: DOMAIN_FAILED
+name: clipper
 functions:
 - github:
     branch: main
@@ -10,20 +11,3 @@ functions:
   routes:
   - path: /
   source_dir: /
-name: qrcode
-static_sites:
-- build_command: ./build.sh
-  environment_slug: html
-  envs:
-  - key: FUNCTION_API_URL
-    scope: BUILD_TIME
-    value: ${qrcode.PUBLIC_URL}
-  github:
-    branch: master
-    deploy_on_push: true
-    repo: digitalocean/sample-functions-nodejs-qrcode
-  name: web-app
-  output_dir: dist
-  routes:
-  - path: /
-  source_dir: /client

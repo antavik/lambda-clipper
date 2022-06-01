@@ -36,7 +36,7 @@ async function main(args) {
   if (response.status !== 200) {
     return {
       error: {
-        statusCode: StatusCodes.INTERNAL_SERVER_ERROR,
+        statusCode: StatusCodes.BAD_GATEWAY,
         body: { message: "could not get url content" }
       }
     }

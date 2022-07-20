@@ -39,8 +39,10 @@ async function main(args) {
 
   const response = await axios.get(
     url,
-    timeout=timeout,
-    headers={ "User-Agent": USER_AGENT, "Accept-Encoding": "gzip, deflate" }
+    {
+      timeout: timeout,
+      headers: { "User-Agent": USER_AGENT, "Accept-Encoding": "gzip, deflate" }
+    }
   );
 
   if (response.status !== 200) {

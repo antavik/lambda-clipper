@@ -9,7 +9,7 @@ const USER_AGENT = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:100.0) Geck
 const TIMEOUT = 1000 * 5
 
 
-async function main(args) {
+function main(args) {
   const userId = args.__ow_headers["x-user-id"];
   if (!userId) {
     return {
@@ -37,14 +37,17 @@ async function main(args) {
 
   console.log(timeout);
 
-  const response = await axios.get(
-    url,
-    {
-      timeout: timeout,
-      headers: { "User-Agent": USER_AGENT, "Accept-Encoding": "gzip, deflate" }
-    }
-  );
+  var config = {
+    timeout: timeout,
+    headers: { "User-Agent": USER_AGENT, "Accept-Encoding": "gzip, deflate" }
+  }
 
+  return axios.get(url, config)
+    .then(processResponse)
+    .catch(processError)
+}
+
+function processResponse(response) {
   if (response.status !== 200) {
     return {
       error: {
@@ -60,6 +63,7 @@ async function main(args) {
     var article = reader.parse();
   } catch (error) {
     console.error(error);
+
     return {
       error: {
         statusCode: StatusCodes.INTERNAL_SERVER_ERROR,
@@ -69,6 +73,17 @@ async function main(args) {
   }
 
   return { body: article }
+}
+
+function processError(error) {
+  console.error(error);
+
+  return {
+    error: {
+      statusCode: StatusCodes.INTERNAL_SERVER_ERROR,
+      body: { message: getReasonPhrase(StatusCodes.INTERNAL_SERVER_ERROR) }
+    }
+  }
 }
 
 exports.main = main;

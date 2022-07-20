@@ -28,21 +28,14 @@ function main(args) {
     }
   }
 
-  const url = args.url;
-
-  var timeout = TIMEOUT;
-  if (args.timeout !== undefined) {
-    timeout = 1000 * args.timeout;
-  }
-
-  console.log(timeout);
-
   var config = {
-    timeout: timeout,
+    timeout: (args.timeout === undefined) ? TIMEOUT : 1000 * args.timeout;,
     headers: { "User-Agent": USER_AGENT, "Accept-Encoding": "gzip, deflate" }
   }
 
-  return axios.get(url, config)
+  console.log(config);
+
+  return axios.get(args.url, config)
     .then(processResponse)
     .catch(processError)
 }

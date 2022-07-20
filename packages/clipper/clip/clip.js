@@ -6,7 +6,7 @@ const axios = require("axios");
 const USER_TOKEN = process.env["USER_TOKEN"];
 const USER_AGENT = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:100.0) Gecko/20100101 Firefox/100.0";
 
-const TIMEOUT = 1000 * 4
+const TIMEOUT = 1000 * 5
 
 
 async function main(args) {

@@ -30,9 +30,15 @@ async function main(args) {
 
   const url = args["url"];
 
+  var timeout = TIMEOUT;
+  if args.has("timeout") {
+    console.log('custom timeout')
+    timeout = 1000 * args["timeout"]
+  }
+
   const response = await axios.get(
     url,
-    timeout=TIMEOUT,
+    timeout=timeout,
     headers={ "User-Agent": USER_AGENT, "Accept-Encoding": "gzip, deflate" }
   );
 

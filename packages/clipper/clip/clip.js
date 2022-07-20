@@ -31,12 +31,9 @@ async function main(args) {
   const url = args.url;
 
   var timeout = TIMEOUT;
-  console.log(args.timeout);
-  console.log(args["timeout"]);
   if (args.timeout !== undefined) {
     var timeout = 1000 * args.timeout
   }
-  console.log(timeout);
 
   const response = await axios.get(
     url,

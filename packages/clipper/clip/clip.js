@@ -33,8 +33,6 @@ function main(args) {
     headers: { "User-Agent": USER_AGENT, "Accept-Encoding": "gzip, deflate" }
   }
 
-  console.log(config);
-
   return axios.get(args.url, config)
     .then(processResponse)
     .catch(processError)

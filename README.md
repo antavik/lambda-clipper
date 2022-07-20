@@ -1,4 +1,4 @@
-## lambda-clipper
+## 📎 lambda-clipper
 Simple Node JS HTML page clipper function for DigitalOcean Functions.
 Get page from ```url```, make it readable and return cleaned article.
 

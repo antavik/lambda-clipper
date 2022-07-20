@@ -27,13 +27,13 @@ async function main(args) {
       }
     }
   }
-
+  console.log(args)
   const url = args["url"];
 
   var timeout = TIMEOUT;
-  if (args.has("timeout")) {
-    timeout = 1000 * args["timeout"]
-  }
+  // if (args.has("timeout")) {
+  //   timeout = 1000 * args["timeout"]
+  // }
 
   const response = await axios.get(
     url,

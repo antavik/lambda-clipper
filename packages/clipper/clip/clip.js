@@ -31,7 +31,7 @@ async function main(args) {
   const url = args["url"];
 
   // var timeout = TIMEOUT;
-  console.log(args.has("timeout"));
+  console.log(args.timeout);
   console.log(args["timeout"]);
   if (args.has("timeout")) {
     var timeout = 1000 * args["timeout"]

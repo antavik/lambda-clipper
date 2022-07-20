@@ -1,6 +1,6 @@
-## 📎 lambda-clipper
+## 📎 λ-clipper
 Simple Node JS HTML page clipper function for DigitalOcean Functions.
-Get page from ```url```, make it readable and return cleaned article.
+Get page from ```url```, make it readable and return cleaned article in ```json```.
 
 ### Setup
 1. Deploy in DO Functions service.

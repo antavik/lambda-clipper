@@ -32,7 +32,6 @@ async function main(args) {
 
   var timeout = TIMEOUT;
   if (args.has("timeout")) {
-    console.log('custom timeout')
     timeout = 1000 * args["timeout"]
   }
 

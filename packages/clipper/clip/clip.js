@@ -28,13 +28,13 @@ async function main(args) {
     }
   }
 
-  const url = args["url"];
+  const url = args.url;
 
-  // var timeout = TIMEOUT;
+  var timeout = TIMEOUT;
   console.log(args.timeout);
   console.log(args["timeout"]);
-  if (args.has("timeout")) {
-    var timeout = 1000 * args["timeout"]
+  if (args.timeout !== undefined) {
+    var timeout = 1000 * args.timeout
   }
   console.log(timeout);
 

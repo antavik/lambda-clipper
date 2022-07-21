@@ -9,7 +9,7 @@ const USER_AGENT = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:100.0) Geck
 const TIMEOUT = 1000 * 5;
 
 
-function main(args) {
+async function main(args) {
   const userId = args.__ow_headers["x-user-id"];
   if (!userId) {
     return {
@@ -33,9 +33,14 @@ function main(args) {
     headers: { "User-Agent": USER_AGENT, "Accept-Encoding": "gzip, deflate" }
   }
 
-  response = axios.get(args.url, config)
-    .then(processResponse)
-    .catch(processError)
+
+  try {
+    response = await axios.get(args.url, config);
+  } catch (error) {
+    return processError(error);
+  }
+
+  return processResponse(response);
 }
 
 function processError(error) {

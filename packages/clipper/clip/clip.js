@@ -40,7 +40,7 @@ async function main(args) {
     return processError(error);
   }
 
-  return processResponse(response);
+  return processResponse(response, url);
 }
 
 function processError(error) {
@@ -71,14 +71,16 @@ function processError(error) {
   }
 }
 
-function processResponse(response) {
+function processResponse(response, url) {
   console.log("response received");
 
   try {
-    var doc = new JSDOM(response.data);
+    var doc = new JSDOM(response.data, {url: url});
     console.log('doc done');
-    var article = new Readability(doc.window.document).parse();
-    console.log('article done');
+    var reader = new Readability(doc.window.document);
+    console.log('reader done');
+    var article = reader.parse();
+    console.log('parsed');
   } catch (error) {
     console.error(error);
     return {

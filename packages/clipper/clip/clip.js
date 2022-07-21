@@ -34,8 +34,8 @@ function main(args) {
   }
 
   response = axios.get(args.url, config)
-    .catch(processError)
     .then(processResponse)
+    .catch(processError)
 }
 
 function processError(error) {
@@ -68,6 +68,7 @@ function processError(error) {
 
 function processResponse(response) {
   console.log("response received");
+  console.log(response.data);
 
   try {
     var doc = new JSDOM(response.data);

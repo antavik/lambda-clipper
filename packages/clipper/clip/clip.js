@@ -33,13 +33,24 @@ function main(args) {
     headers: { "User-Agent": USER_AGENT, "Accept-Encoding": "gzip, deflate" }
   }
 
-  return axios.get(args.url, config)
-    .then(processResponse)
+  response = axios.get(args.url, config)
     .catch(processError)
+    .then(processResponse)
 }
 
-function processResponse(response) {
-  if (response.status !== 200) {
+function processError(error) {
+  if (error.response) {
+    console.log(error.response.data);
+    console.log(error.response.status);
+    console.log(error.response.headers);
+    return {
+      error: {
+        statusCode: StatusCodes.BAD_GATEWAY,
+        body: { message: "could not get url content" }
+      }
+    }
+  } else if (error.request) {
+    console.log(error.request);
     return {
       error: {
         statusCode: StatusCodes.BAD_GATEWAY,
@@ -48,13 +59,23 @@ function processResponse(response) {
     }
   }
 
+  console.error(error.message);
+  console.error(error.config);
+  return {
+    error: {
+      statusCode: StatusCodes.INTERNAL_SERVER_ERROR,
+      body: { message: getReasonPhrase(StatusCodes.INTERNAL_SERVER_ERROR) }
+    }
+  }
+}
+
+function processResponse(response) {
   try {
     var doc = new JSDOM(response.data);
     var reader = new Readability(doc.window.document);
     var article = reader.parse();
   } catch (error) {
     console.error(error);
-
     return {
       error: {
         statusCode: StatusCodes.INTERNAL_SERVER_ERROR,
@@ -64,17 +85,6 @@ function processResponse(response) {
   }
 
   return { body: article }
-}
-
-function processError(error) {
-  console.error(error);
-
-  return {
-    error: {
-      statusCode: StatusCodes.INTERNAL_SERVER_ERROR,
-      body: { message: getReasonPhrase(StatusCodes.INTERNAL_SERVER_ERROR) }
-    }
-  }
 }
 
 exports.main = main;

@@ -73,12 +73,12 @@ function processError(error) {
 
 function processResponse(response) {
   console.log("response received");
-  console.log(response.data);
 
   try {
     var doc = new JSDOM(response.data);
-    var reader = new Readability(doc.window.document);
-    var article = reader.parse();
+    console.log('doc done');
+    var article = new Readability(doc.window.document).parse();
+    console.log('article done');
   } catch (error) {
     console.error(error);
     return {

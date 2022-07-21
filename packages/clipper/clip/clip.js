@@ -40,9 +40,7 @@ function main(args) {
 
 function processError(error) {
   if (error.response) {
-    console.log(error.response.data);
-    console.log(error.response.status);
-    console.log(error.response.headers);
+    console.log("get status", error.response.status);
     return {
       error: {
         statusCode: StatusCodes.BAD_GATEWAY,
@@ -60,7 +58,6 @@ function processError(error) {
   }
 
   console.error(error.message);
-  console.error(error.config);
   return {
     error: {
       statusCode: StatusCodes.INTERNAL_SERVER_ERROR,
@@ -70,6 +67,8 @@ function processError(error) {
 }
 
 function processResponse(response) {
+  console.log("response received");
+
   try {
     var doc = new JSDOM(response.data);
     var reader = new Readability(doc.window.document);

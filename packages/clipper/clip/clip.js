@@ -71,8 +71,6 @@ function processError(error) {
 }
 
 function processResponse(response, url) {
-  console.log("response received");
-
   try {
     var doc = new JSDOM(response.data, {url: url});
     var reader = new Readability(doc.window.document);

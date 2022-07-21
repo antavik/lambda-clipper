@@ -44,7 +44,7 @@ async function main(args) {
 
 function processError(error) {
   if (error.response) {
-    console.log("get status", error.response.status);
+    console.log("status falls out of the range of 2xx", error.response.status);
     return {
       error: {
         statusCode: StatusCodes.BAD_GATEWAY,
@@ -52,7 +52,7 @@ function processError(error) {
       }
     }
   } else if (error.request) {
-    console.log(error.request);
+    console.log("request was made but no response");
     return {
       error: {
         statusCode: StatusCodes.BAD_GATEWAY,
@@ -61,7 +61,7 @@ function processError(error) {
     }
   }
 
-  console.error(error.message);
+  console.error("something happened in setting up the request");
   return {
     error: {
       statusCode: StatusCodes.INTERNAL_SERVER_ERROR,
@@ -75,11 +75,8 @@ function processResponse(response, url) {
 
   try {
     var doc = new JSDOM(response.data, {url: url});
-    console.log('doc done');
     var reader = new Readability(doc.window.document);
-    console.log('reader done');
     var article = reader.parse();
-    console.log('parsed');
   } catch (error) {
     console.error(error);
     return {

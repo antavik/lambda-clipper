@@ -33,14 +33,13 @@ async function main(args) {
     headers: { "User-Agent": USER_AGENT, "Accept-Encoding": "gzip, deflate" }
   }
 
-
   try {
-    response = await axios.get(args.url, config);
+    var response = await axios.get(args.url, config);
   } catch (error) {
     return processError(error);
   }
 
-  return processResponse(response, url);
+  return processResponse(response, args.url);
 }
 
 function processError(error) {
